@@ -5,7 +5,7 @@ defaults: &defaults
     - image: circleci/openjdk:8u171-jdk-node-browsers
     - image: circleci/mongo:4.2
 
-  working_directory: ~/mern-auth
+  working_directory: ~/mern-auth-cra
 
 version: 2
 jobs:
@@ -24,13 +24,12 @@ jobs:
 
       - run:
           name: Install backend and general dependencies
-          command: yarn install
+          command: npm install
 
       - save_cache:
           name: Save backend/general packages cache
           paths:
-            # - ~/.cache/node_modules
-            - ~/.cache
+            - ~/.cache/node_modules
           key: v1-dependencies-{{.Branch}}-{{ checksum "package.json" }}
 
       - restore_cache:
@@ -42,17 +41,17 @@ jobs:
 
       - run:
           name: Install frontend packages
-          command: cd client && yarn install
+          command: cd client && npm install
 
       - save_cache:
           paths:
-            # - ~/.cache/node_modules
-            - ~/client/.cache
+            - ~/.cache/node_modules
+            - ~/client/.cache/node_modules
           key: v1-dependencies-{{.Branch}}-{{ checksum "client/package.json" }}
 
       - run:
           name: Build frontend react app
-          command: cd client && yarn build
+          command: cd client && npm run build
 
       # - run:
       #     name: Analyze react app bundle
@@ -115,9 +114,9 @@ workflows:
   starter-workflow:
     jobs:
       - build
-      - js_unit_tests:
-          requires:
-            - build
+      # - js_unit_tests:
+      #     requires:
+      #       - build
       # - backend_unit_tests:
       #     requires:
       #       - build
