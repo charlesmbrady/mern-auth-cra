@@ -9,7 +9,7 @@ const withAuth = function(req, res, next) {
     req.cookies.token;
 
   if (token) {
-    jwt.verify(token, process.env.PRIVATE_KEY, (err, decoded) => {
+    jwt.verify(token, "secret", (err, decoded) => {
       if (err) {
         res.status(401).send("Unauthorized: Invalid token... " + err);
       } else {

@@ -1,18 +1,18 @@
 const router = require("express").Router();
-// const decisionsController = require("../../controllers/decisionsController"); import controller here
+const decisionsController = require("../../controllers/decisionsController");
 const withAuth = require("../../middleware.js");
 
 // Matches with "/api/decisions"
-// router
-//   .route("/")
-//   .post(withAuth, decisionsController.createDecision)
-//   .get(withAuth, decisionsController.getAllDecisionsForUser)
-//   .put(withAuth, decisionsController.updateDecision);
+router
+  .route("/")
+  .post(withAuth, decisionsController.createDecision)
+  .get(withAuth, decisionsController.getAllDecisionsForUser)
+  .put(withAuth, decisionsController.updateDecision);
 
-// router
-//   .route("/:id")
-//   .get(withAuth, decisionsController.getDecisionById)
-//   .delete(withAuth, decisionsController.deleteDecision);
+router
+  .route("/:id")
+  .get(withAuth, decisionsController.getDecisionById)
+  .delete(withAuth, decisionsController.deleteDecision);
 
 // //put this middleware function before routes you want protected , also copy and paste to bottom of any set of routes you want protected
 // function verifyToken(req, res, next) {
