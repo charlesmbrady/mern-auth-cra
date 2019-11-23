@@ -60,7 +60,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - mern-auth
+            - mern-auth-cra
             - .cache
   # js_unit_tests:
   #   <<: *defaults
